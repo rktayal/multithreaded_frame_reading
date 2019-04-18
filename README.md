@@ -92,33 +92,35 @@ class WebcamVideoStream:
 Constructor gets the pointer to the stream using the `cv2.VideoCapture` method.
 `src=0` is presumed to be the index of the webcam.
 ```
-	def start(self):
-		# start the thread to read frames from the video stream
-		Thread(target=self.update, args=()).start()
-		return self
+def start(self):
+	# start the thread to read frames from the video stream
+	Thread(target=self.update, args=()).start()
+	return self
  
-	def update(self):
-		# keep looping infinitely until the thread is stopped
-		while True:
-			# if the thread indicator variable is set, stop the thread
-			if self.stopped:
-				return
+def update(self):
+	# keep looping infinitely until the thread is stopped
+	while True:
+		# if the thread indicator variable is set, stop the thread
+		if self.stopped:
+			return
+
+		# otherwise, read the next frame from the stream
+		(self.grabbed, self.frame) = self.stream.read()
+
+def read(self):
+	# return the frame most recently read
+	return self.frame
  
-			# otherwise, read the next frame from the stream
-			(self.grabbed, self.frame) = self.stream.read()
- 
-	def read(self):
-		# return the frame most recently read
-		return self.frame
- 
-	def stop(self):
-		# indicate that the thread should be stopped
-		self.stopped = True
+def stop(self):
+	# indicate that the thread should be stopped
+	self.stopped = True
 ```
 `start` method creates & starts the actual thread for frame reading. It does this by creating a `Thread` object
 and using the `update` method as the callable object invoked by the `run` method of the thread.
 Once the `start` method of `WebCamVideoStream` will be called, it will invoke the internal `run` method of thread,
 which will inturn invoke the `update` method of the class.
+
+## Results
 
 ## Conclusions
 We learned how threading can be used to increase your webcam FPS using Python and OpenCV.
