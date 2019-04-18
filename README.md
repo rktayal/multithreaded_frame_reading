@@ -121,12 +121,17 @@ Once the `start` method of `WebCamVideoStream` will be called, it will invoke th
 which will inturn invoke the `update` method of the class.
 
 ## Results
+![result snapshot](./images/result.png)
+As seen from above results, there is a drastic imporve in the FPS value, when using a multithreaded frame reading approach.
+Only caveat here is, the increase is due to the increase in frame reading time and reduction in latency time, i.e. waiting 
+time for frame, since frame will always be present.
+
 
 ## Conclusions
 We learned how threading can be used to increase your webcam FPS using Python and OpenCV.
 
 
-we were able to obtain a 379% increase in FPS simply by using threading. However the number not only reflects the
+we were able to obtain a drastic increase in FPS simply by using threading. However the number not only reflects the
 increase in the FPS but also accomodates for the decrease in latency since the frame is always ready to be processed, 
 hence reducing the latency time.
 
